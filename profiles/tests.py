@@ -1,3 +1,6 @@
+def test_profiles_index():
+    assert 1
 
 
-# Create your tests here.
+def test_profile():
+    assert 1
