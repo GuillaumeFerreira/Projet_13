@@ -19,7 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "oc_lettings_site.apps.OCLettingsSiteConfig",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "lettings",
-    "profiles"
+    "profiles",
+    "oc_lettings_site"
 ]
 
 MIDDLEWARE = [
