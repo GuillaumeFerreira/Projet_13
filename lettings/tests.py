@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.test import Client
 import pytest
+from .models import Address, Letting
 
 
 @pytest.mark.django_db
@@ -12,5 +13,9 @@ def test_index():
 
     assert b"Lettings" in response.content
 
+@pytest.mark.django_db
 def test_letting():
-    assert 1
+    client = Client()
+    url = reverse('letting', kwargs={'letting_id': 1})
+    response = client.get(url)
+    assert response.status_code == 200
