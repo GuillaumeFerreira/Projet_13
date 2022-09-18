@@ -6,11 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('lettings', '0002_alter_letting_address'),
+        ("lettings", "0002_alter_letting_address"),
     ]
 
     operations = [
-        migrations.RunSQL("""
+        migrations.RunSQL(
+            """
                 INSERT INTO lettings_letting (
                     id,
                     title,
@@ -22,7 +23,8 @@ class Migration(migrations.Migration):
                     address
                 FROM
                     oc_lettings_site_letting;
-            """, reverse_sql="""
+            """,
+            reverse_sql="""
                 INSERT INTO oc_lettings_site_letting (
                     id,
                     title,
@@ -34,5 +36,6 @@ class Migration(migrations.Migration):
                     address
                 FROM
                     lettings_letting;
-            """)
+            """,
+        )
     ]

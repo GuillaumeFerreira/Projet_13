@@ -6,11 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('profiles', '0001_initial'),
+        ("profiles", "0001_initial"),
     ]
 
     operations = [
-        migrations.RunSQL("""
+        migrations.RunSQL(
+            """
                 INSERT INTO profiles_profile (
                     id,
                     user_id,
@@ -22,7 +23,8 @@ class Migration(migrations.Migration):
                     favorite_city
                 FROM
                     oc_lettings_site_profile;
-            """, reverse_sql="""
+            """,
+            reverse_sql="""
                 INSERT INTO oc_lettings_site_profile (
                     id,
                     user_id,
@@ -34,5 +36,6 @@ class Migration(migrations.Migration):
                     favorite_city
                 FROM
                     profiles_profile;
-            """)
+            """,
+        )
     ]
