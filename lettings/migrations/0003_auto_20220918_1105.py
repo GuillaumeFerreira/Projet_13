@@ -11,44 +11,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunSQL("""
-                INSERT INTO lettings_address (
+                INSERT INTO lettings_letting (
                     id,
-                    number,
-                    street,
-                    city,
-                    state,
-                    zip_code,
-                    country_iso_code
+                    title,
+                    address
                 )
                 SELECT
                     id,
-                    number,
-                    street,
-                    city,
-                    state,
-                    zip_code,
-                    country_iso_code
+                    title,
+                    address
                 FROM
-                    oc_lettings_site_address;
+                    oc_lettings_site_letting;
             """, reverse_sql="""
-                INSERT INTO oc_lettings_site_address (
+                INSERT INTO oc_lettings_site_letting (
                     id,
-                    number,
-                    street,
-                    city,
-                    state,
-                    zip_code,
-                    country_iso_code
+                    title,
+                    address
                 )
                 SELECT
                     id,
-                    number,
-                    street,
-                    city,
-                    state,
-                    zip_code,
-                    country_iso_code
+                    title,
+                    address
                 FROM
-                    lettings_address;
+                    lettings_letting;
             """)
     ]
