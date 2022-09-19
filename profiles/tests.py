@@ -11,7 +11,6 @@ def test_profiles_index():
     client = Client()
     response = client.get(url)
     assert response.status_code == 200
-
     assert b"Profiles" in response.content
 
 
