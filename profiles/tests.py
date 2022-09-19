@@ -1,8 +1,9 @@
+import pytest
 from django.urls import reverse
 from django.test import Client
-import pytest
 from .models import Profile
 from django.contrib.auth.models import User
+
 
 @pytest.mark.django_db
 def test_profiles_index():
@@ -12,6 +13,7 @@ def test_profiles_index():
     assert response.status_code == 200
 
     assert b"Profiles" in response.content
+
 
 @pytest.mark.django_db
 def test_profile():
