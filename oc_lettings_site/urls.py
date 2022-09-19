@@ -3,6 +3,7 @@ from django.urls import path
 from profiles.views import profile, profiles_index
 from lettings.views import index, letting, index_old
 
+
 urlpatterns = [
     path("", index_old, name="index_old"),
     path("lettings/", index, name="index"),
