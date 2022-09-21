@@ -1,13 +1,30 @@
-FROM python:latest
+# pull official base image
+FROM python:3.10-alpine
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-ENV SECRET_KEY fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s
-ENV DATABASE_URL=sqlite:///db/oc-lettings-site.sqlite3
-ENV SQLITE_URL=sqlite:///db/oc-lettings-site.sqlite3
+# set work directory
+WORKDIR /app
 
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DEBUG 0
+
+# install psycopg2
+RUN apk update \
+    && apk add --virtual build-essential gcc python3-dev musl-dev \
+    && apk add postgresql-dev \
+    && pip install psycopg2
+
+# install dependencies
+COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
-EXPOSE 8000
+# copy project
+COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# add and run as non-root user
+RUN adduser -D myuser
+USER myuser
+
+# run gunicorn
+CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
