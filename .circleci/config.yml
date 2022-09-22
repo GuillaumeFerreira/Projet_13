@@ -20,13 +20,11 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the test job"
-        
-  build-docker:
+
+  build_docker_image:
     docker:
-      - image: cimg/python:3.9.6
-      auth:
-        username: $DOCKER_LOGIN
-        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: cimg/python:3.10
+    resource_class: medium
     steps:
       - checkout
       - setup_remote_docker:
