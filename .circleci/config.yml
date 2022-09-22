@@ -6,7 +6,7 @@ jobs:
     docker:
       - image: cimg/python:3.9.6
         auth:
-          username: guillaumeferreira
+          username: $DOCKER_LOGIN
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
@@ -15,7 +15,7 @@ jobs:
     docker:
       - image: cimg/python:3.9.6
         auth:
-          username: guillaumeferreira
+          username: $DOCKER_LOGIN
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
