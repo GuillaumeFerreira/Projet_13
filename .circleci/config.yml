@@ -1,50 +1,18 @@
 version: 2.1
 
-executors:
-    node:
-        docker:
-            - image: cimg/python:3.9.6
+# Define the jobs we want to run for this project
 jobs:
-    # LINTING
-    test-linting:
-        executors: node
-        steps:
-            - checkout
-            - python/install-packages:
-                pkg-manager: pip
-            - run:
-                name: Run linting
-                command: flake8
-    # DOCKER
-    build-and-push-to-docker:
-        executor: docker/docker
-        steps:
-            - setup_remote_docker
-            - checkout
-            # Check that Docker username and password environment variables are set
-            # Then run docker login to ensure that you can push the built image
-            - docker/check
-            - docker/build:
-                  image: ${DOCKER_LOGIN}/orange_county_lettings
-                  tag: $CIRCLE_SHA1
-            - docker/push:
-                  image: ${DOCKER_LOGIN}/orange_county_lettings
-                  tag: $CIRCLE_SHA1
+  test:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
 
 workflows:
-  test-application:
+  test:
     jobs:
-      # TESTS BEFORE DEPLOYMENT
-      - test-linting
-      - python/test:
-          version: '3.9.6'
-          pkg-manager: pip
-          args: '-r requirements.txt'
-      # DOCKER
-      - build-and-push-to-docker:
-          requires:
-            - test-linting
-            - python/test
-          filters:
-            branches:
-              only: main
+      - test
