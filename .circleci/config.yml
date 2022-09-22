@@ -20,7 +20,20 @@ jobs:
     steps:
       - checkout
       - run: echo "this is the test job"
-
+  build-and-push-to-docker:
+      executor: docker/docker
+      steps:
+        - setup_remote_docker
+        - checkout
+        # Check that Docker username and password environment variables are set
+        # Then run docker login to ensure that you can push the built image
+        - docker/check
+        - docker/build:
+            image: ${DOCKER_LOGIN}/web
+            tag: $CIRCLE_SHA1
+        - docker/push:
+            image: ${DOCKER_LOGIN}/web
+            tag: $CIRCLE_SHA1
 workflows:
   build_and_test:
     jobs:
@@ -31,3 +44,4 @@ workflows:
           filters:
             branches:
               only: main
+      - build-and-push-to-docker
