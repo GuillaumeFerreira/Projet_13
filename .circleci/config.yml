@@ -26,13 +26,16 @@ jobs:
       auth:
         username: $DOCKER_LOGIN
         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      steps:
-        - checkout
-        - setup_remote_docker:
-            version: 20.10.14
-        - run: docker image build --file=Dockerfile --tag=$DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1 .
-        - run: echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-stdin
-        - run: docker image push $DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          name: build and deploy to dockerhub
+          command: |
+            docker image build --file=Dockerfile --tag=$DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1 .
+            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-stdin
+            docker image push $DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1
 
 workflows:
   build_and_test:
