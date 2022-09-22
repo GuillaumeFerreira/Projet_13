@@ -10,6 +10,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - run: pip install pytest
       - run: pytest
 
 workflows:
