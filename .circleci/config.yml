@@ -29,13 +29,10 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run:
-          name: build and deploy to dockerhub
-          command: |
-            docker image build --file=Dockerfile
-            docker tag web $DOCKER_USERNAME/web:$CIRCLE_SHA1
-            echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-stdin
-            docker image push $DOCKER_USERNAME/web:$CIRCLE_SHA1
+      - docker/check
+      - docker/build:
+          image: ${DOCKER_LOGIN}/web
+          tag: $CIRCLE_SHA1
 
 workflows:
   build_and_test:
