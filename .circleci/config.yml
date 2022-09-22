@@ -21,19 +21,22 @@ jobs:
       - checkout
       - run: echo "this is the test job"
   build-and-push-to-docker:
-    executor: docker/docker
-    steps:
-      - setup_remote_docker
-      - checkout
-      # Check that Docker username and password environment variables are set
-      # Then run docker login to ensure that you can push the built image
-      - docker/check
-      - docker/build:
-          image: ${DOCKER_LOGIN}/web
-          tag: $CIRCLE_SHA1
-      - docker/push:
-          image: ${DOCKER_LOGIN}/web
-          tag: $CIRCLE_SHA1
+    docker:
+      - image: cimg/python:python:3.9.6
+      auth:
+        username: $DOCKER_LOGIN
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      steps:
+        - checkout
+        - setup_remote_docker:
+            version: 20.10.14
+        - run:
+            name: build and deploy to dockerhub
+            command: |
+              docker image build --file=Dockerfile --tag=$DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1 .
+              echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-stdin
+              docker image push $DOCKER_USERNAME/$IMAGE_REPO:$CIRCLE_SHA1
+
 workflows:
   build_and_test:
     jobs:
