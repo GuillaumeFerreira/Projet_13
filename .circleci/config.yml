@@ -25,13 +25,10 @@ jobs:
       - run: echo "this is the test job"
 
   build_docker_image:
-    docker:
-      - image: cimg/python:3.10
-    resource_class: medium
+    executor: docker/docker
     steps:
+      - setup_remote_docker
       - checkout
-      - setup_remote_docker:
-          version: 20.10.14
       - docker/check
       - docker/build:
           image: $DOCKER_LOGIN/web
