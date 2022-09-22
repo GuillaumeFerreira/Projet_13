@@ -34,7 +34,7 @@ jobs:
           version: 20.10.14
       - docker/check
       - docker/build:
-          image: ${DOCKER_LOGIN}/web
+          image: $DOCKER_LOGIN/web
           tag: $CIRCLE_SHA1
 
 workflows:
