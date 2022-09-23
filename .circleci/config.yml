@@ -24,7 +24,6 @@ jobs:
           name: install packages
           command: |
             pip install --user --no-cache-dir -r requirements.txt
-          when: always
       - run:
           name: run pytest
           command: |
