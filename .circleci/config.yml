@@ -17,7 +17,7 @@ jobs:
           version: 20.10.14
       - run: docker build -t web:latest .
       - run: docker tag web guillaumeferreira/web:$CIRCLE_SHA1
-      - run: docker push guillaumeferreira/web:$CIRCLE_SHA1
+      - run: docker push guillaumeferreira/web
   test:
     docker:
       - image: cimg/python:3.9.6
