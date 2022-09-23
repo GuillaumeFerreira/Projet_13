@@ -20,12 +20,12 @@ jobs:
     resource_class: small
     steps:
       # get the src from GH
-        - checkout
-        - run:
-        name: install packages
-        command: |
-          pip install --user --no-cache-dir -r requirements.txt
-        when: always
+      - checkout
+      - run:
+      name: install packages
+      command: |
+        pip install --user --no-cache-dir -r requirements.txt
+      when: always
 
 
 workflows:
