@@ -17,15 +17,15 @@ jobs:
   test:
     docker:
       - image: cimg/python:3.9.6
-        auth:
-          username: $DOCKER_LOGIN
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    resource_class: small
     steps:
-      - checkout
-      - run: pip install -r requirements.txt
-      - run: pip install pytest
-      - run: pytest
-      - run: echo "this is the test job"
+      # get the src from GH
+        - checkout
+        - run:
+        name: install packages
+        command: |
+          pip install --user --no-cache-dir -r requirements.txt
+        when: always
 
 
 workflows:
