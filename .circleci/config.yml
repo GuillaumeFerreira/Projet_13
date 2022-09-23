@@ -16,7 +16,7 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run: docker build -t web:latest .
-      - run: docker tag web $DOCKER_LOGIN/oc-lettings:$CIRCLE_SHA1
+      - run: docker tag web:latest $DOCKER_LOGIN/oc-lettings:$CIRCLE_SHA1
   test:
     docker:
       - image: cimg/python:3.9.6
