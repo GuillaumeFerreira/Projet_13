@@ -15,7 +15,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run: echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+      - run: echo $DOCKER_PASS | docker login -u guillaumeferreira --password-stdin
       - run: docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
       - run: docker push guillaumeferreira/web:$CIRCLE_SHA1
   test:
