@@ -1,13 +1,11 @@
 version: 2.1
 
 # Define the jobs we want to run for this project
-orbs:
-  python: circleci/python@2.0.1
-  docker: circleci/docker@2.0.2
+
 jobs:
   build:
     docker:
-      - image: cimg/base:2022.06
+      - image: cimg/python:3.9.6
         auth:
           username: guillaumeferreira
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -15,7 +13,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run: echo $DOCKER_PASS | docker login -u guillaumeferreira --password-stdin
       - run: docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
       - run: docker push guillaumeferreira/web:$CIRCLE_SHA1
   test:
