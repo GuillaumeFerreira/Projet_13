@@ -13,8 +13,11 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker build -t guillaumeferreira/web:latest .
-      - run: docker push guillaumeferreira/web:latest
+          docker_layer_caching: true
+      - run:  |
+          docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
+          docker push guillaumeferreira/web:$CIRCLE_SHA1
   test:
     docker:
       - image: cimg/python:3.9.6
