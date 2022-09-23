@@ -13,6 +13,8 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 20.10.14
       - run: docker build -t web:latest .
   test:
     docker:
