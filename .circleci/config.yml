@@ -28,6 +28,10 @@ jobs:
           name: run pytest
           command: |
             pytest
+      - run:
+          name: check linting
+          command: |
+            flake8
 
 workflows:
   build_and_test:
