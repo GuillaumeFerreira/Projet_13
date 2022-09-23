@@ -19,13 +19,12 @@ jobs:
       - image: cimg/python:3.9.6
     resource_class: small
     steps:
-      # get the src from GH
       - checkout
       - run:
-      name: install packages
-      command: |
-        pip install --user --no-cache-dir -r requirements.txt
-      when: always
+          name: install packages
+          command: |
+            pip install --user --no-cache-dir -r requirements.txt
+          when: always
 
 
 workflows:
