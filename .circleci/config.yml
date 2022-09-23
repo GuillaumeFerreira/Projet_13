@@ -25,7 +25,10 @@ jobs:
           command: |
             pip install --user --no-cache-dir -r requirements.txt
           when: always
-
+      - run:
+          name: run pytest
+          command: |
+            pytest
 
 workflows:
   build_and_test:
