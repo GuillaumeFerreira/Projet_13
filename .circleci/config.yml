@@ -20,7 +20,6 @@ jobs:
           docker_layer_caching: true
       - run:  |
           docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
-          echo $DOCKER_PASSWORD | docker login -u guillaumeferreira --password-stdin
           docker push guillaumeferreira/web:$CIRCLE_SHA1
   test:
     docker:
