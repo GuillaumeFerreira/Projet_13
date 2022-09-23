@@ -13,8 +13,8 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.14
-      - run: docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
-      - run: docker push guillaumeferreira/web:$CIRCLE_SHA1
+      - run: docker build -t guillaumeferreira/web:latest .
+      - run: docker push guillaumeferreira/web:latest
   test:
     docker:
       - image: cimg/python:3.9.6
