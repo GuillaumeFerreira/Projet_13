@@ -13,7 +13,7 @@ jobs:
           docker_layer_caching: true
       - run:  |
           docker build -t guillaumeferreira/web:$CIRCLE_SHA1 .
-          echo "$DOCKER_PASSWORD" | docker login --username=$DOCKER_USERNAME --password-stdin
+          echo $DOCKER_PWD | docker login -u $DOCKER_LOGIN --password-stdin
           docker push guillaumeferreira/web:$CIRCLE_SHA1
   test:
     docker:
