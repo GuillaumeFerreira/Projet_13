@@ -1,6 +1,6 @@
 import os
 from django.core.management.utils import get_random_secret_key
-
+import sentry_sdk
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -117,3 +117,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # heroku & static file
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+sentry_sdk.init(
+    dsn="https://58161a11b7eb4d079d757acacf6bcc4e@o1424714.ingest.sentry.io/6772891",
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=1.0
+)
