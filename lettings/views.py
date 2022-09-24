@@ -40,7 +40,5 @@ def letting(request, letting_id):
 
 
 def trigger_error(request):
-    try:
-        1 / 0
-    finally:
-        raise Exception("Impossible de divisé par zéro")
+    return 1 / 0
+
