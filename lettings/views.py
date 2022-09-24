@@ -41,4 +41,3 @@ def letting(request, letting_id):
 
 def trigger_error(request):
     return 1 / 0
-
