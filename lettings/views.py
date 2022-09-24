@@ -37,3 +37,10 @@ def letting(request, letting_id):
         "address": letting.address,
     }
     return render(request, "letting.html", context)
+
+
+def trigger_error(request):
+    try:
+        div_zero = 1 / 0
+    finally:
+        raise Exception("Impossible de divisé par zéro")

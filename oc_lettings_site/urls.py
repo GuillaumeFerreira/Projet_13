@@ -1,12 +1,7 @@
 from django.contrib import admin
 from django.urls import path
 from profiles.views import profile, profiles_index
-from lettings.views import index, letting, index_old
-
-
-def trigger_error(request):
-    division_by_zero = 1 / 0
-    return division_by_zero
+from lettings.views import index, letting, index_old, trigger_error
 
 
 urlpatterns = [
