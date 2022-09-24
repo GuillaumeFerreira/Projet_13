@@ -19,9 +19,9 @@ jobs:
           version: 20.10.14
           docker_layer_caching: true
       - run:  |
-          docker build -t $DOCKER_LOGIN/HEROKU_APP_NAME:$CIRCLE_SHA1 .
+          docker build -t $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1 .
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_LOGIN --password-stdin
-          docker push $DOCKER_LOGIN/HEROKU_APP_NAME:$CIRCLE_SHA1
+          docker push $DOCKER_LOGIN/$HEROKU_APP_NAME:$CIRCLE_SHA1
   test:
     docker:
       - image: cimg/python:3.9.6
