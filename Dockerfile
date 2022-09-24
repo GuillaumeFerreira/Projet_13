@@ -29,5 +29,7 @@ RUN python manage.py collectstatic --noinput
 RUN adduser -D myuser
 USER myuser
 
+ENV PORT=8000
+
 # run gunicorn
 CMD gunicorn oc_lettings_site.wsgi:application --bind 0.0.0.0:$PORT
