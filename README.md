@@ -94,7 +94,9 @@ Vous aurez besoin :
 
 ## Déroulement du déploiement avec le pipeline CI/CD
 
-- A chaque mise à jour du github le pipeline s'actionne,il execute alors les test suivie de flake8
-- Si l'opération n'a pas d'erreurs alors on créer une image Docker et on la push sur le DockerHub
+- A chaque mise à jour du github le pipeline s'actionne,il execute alors les tests, suivi de flake8
+- Si l'opération n'a pas d'erreurs alors on créé une image Docker et on la push sur le DockerHub
 - Si la conteneurisation est réussi on déploie l application sur Heroku
-- 
+
+Les variables d'environnement sont des données sensibles à dissimuler du public
+Utiliser donc des variables d'environnement docker pour Dockerfile
