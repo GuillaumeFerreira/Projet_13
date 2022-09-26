@@ -97,3 +97,4 @@ Vous aurez besoin :
 - A chaque mise à jour du github le pipeline s'actionne,il execute alors les test suivie de flake8
 - Si l'opération n'a pas d'erreurs alors on créer une image Docker et on la push sur le DockerHub
 - Si la conteneurisation est réussi on déploie l application sur Heroku
+- 
