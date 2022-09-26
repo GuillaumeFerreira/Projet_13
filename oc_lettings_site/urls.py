@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from profiles.views import profile, profiles_index
-from lettings.views import index, letting, index_old, trigger_error
+from lettings.views import index, letting
+from .views import index_old, trigger_error
 
 
 urlpatterns = [
