@@ -75,3 +75,25 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+## Déploiement
+Le déploiement du projet ce fait via le pipeline CI/CD CircleCI,il va permettre :
+
+- Tester le linting du code du site
+- Exécuter une suite de tests unitaires à l'aide de pytest
+- Créer une image du projet sur la plateforme DockerHub
+- Deployer le site via heroku
+
+### Prérequis pour le bon fonctionnement du déploiement
+Vous aurez besoin :
+
+- D'un compte CircleCI 
+- D'un compte Docker
+- D'un compte Heroku
+- D'un compte Sentry
+
+## Déroulement du déploiement avec le pipeline CI/CD
+
+- A chaque mise à jour du github le pipeline s'actionne,il execute alors les test suivie de flake8
+- Si l'opération n'a pas d'erreurs alors on créer une image Docker et on la push sur le DockerHub
+- Si la conteneurisation est réussi on déploie l application sur Heroku
